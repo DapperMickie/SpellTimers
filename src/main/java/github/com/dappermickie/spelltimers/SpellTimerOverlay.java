@@ -180,10 +180,10 @@ class SpellTimerOverlay extends OverlayPanel
 
 			drawProgress(graphics, textX, y + 52, PANEL_WIDTH - (textX - x) - PADDING, 7, stateColor);
 
-			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, oldAntialiasing);
-			graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, oldTextAntialiasing);
-			graphics.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, oldFractionalMetrics);
-			graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, oldInterpolation);
+			restoreRenderingHint(graphics, RenderingHints.KEY_ANTIALIASING, oldAntialiasing);
+			restoreRenderingHint(graphics, RenderingHints.KEY_TEXT_ANTIALIASING, oldTextAntialiasing);
+			restoreRenderingHint(graphics, RenderingHints.KEY_FRACTIONALMETRICS, oldFractionalMetrics);
+			restoreRenderingHint(graphics, RenderingHints.KEY_INTERPOLATION, oldInterpolation);
 			graphics.setFont(oldFont);
 			graphics.setColor(oldColor);
 			graphics.setStroke(oldStroke);
@@ -192,6 +192,17 @@ class SpellTimerOverlay extends OverlayPanel
 			bounds.setLocation(preferredLocation);
 			bounds.setSize(dimension);
 			return dimension;
+		}
+
+		private void restoreRenderingHint(Graphics2D graphics, RenderingHints.Key key, Object value)
+		{
+			if (value == null)
+			{
+				graphics.getRenderingHints().remove(key);
+				return;
+			}
+
+			graphics.setRenderingHint(key, value);
 		}
 
 		private void drawIcon(Graphics2D graphics, SpellTimer timer, int x, int y, Color stateColor)
