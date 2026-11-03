@@ -425,7 +425,10 @@ public class SpellTimerPlugin extends Plugin
 		return lower.equals("logs")
 			|| lower.equals("oak logs")
 			|| lower.equals("teak logs")
-			|| lower.equals("mahogany logs");
+			|| lower.equals("mahogany logs")
+			|| lower.equals("camphor logs")
+			|| lower.equals("ironwood logs")
+			|| lower.equals("rosewood logs");
 	}
 
 	private static boolean isStringJewelleryInput(String name)
